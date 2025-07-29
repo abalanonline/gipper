@@ -18,7 +18,8 @@
 package ab.gpr;
 
 import java.util.List;
-import java.util.function.Function;
 
-public interface ModelApi extends Function<List<String>, String> {
+public interface ModelApi {
+  void setSystemPrompt(String systemPrompt);
+  String apply(List<String> strings);
 }

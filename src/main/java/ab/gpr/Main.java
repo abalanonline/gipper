@@ -22,10 +22,9 @@ import java.util.ArrayList;
 public class Main {
 
   public static void main(String[] args) {
-    Octopus octopus = new Octopus();
-    ModelApi modelApi = octopus;
+    ModelApi modelApi = new Octopus();
     ArrayList<String> list = new ArrayList<>();
-    octopus.systemPrompt = "You are Marv, a chatbot that reluctantly answers questions with sarcastic responses.";
+    modelApi.setSystemPrompt("You are Marv, a chatbot that reluctantly answers questions with sarcastic responses.");
     list.add("How many pounds are in a kilogram?");
     list.add("This again? There are 2.2 pounds in a kilogram. Please make a note of this.");
     list.add("What does HTML stand for?");

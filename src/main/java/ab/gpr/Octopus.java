@@ -40,6 +40,11 @@ public class Octopus implements ModelApi {
     headers.put("Authorization", "Bearer " + openaiApiKey);
   }
 
+  @Override
+  public void setSystemPrompt(String systemPrompt) {
+    this.systemPrompt = systemPrompt;
+  }
+
   private void addRoleContent(List<Map<String, String>> input, String role, String content) {
     Map<String, String> map = new LinkedHashMap<>();
     map.put("role", role);
