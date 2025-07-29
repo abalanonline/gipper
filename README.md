@@ -1,9 +1,9 @@
 # gipper
 Gipper - Your Personal Gipping Assistant
 
-**gipp**
-/ɡɪp/
-verb
+**gipp**    
+/ɡɪp/    
+verb    
 gerund or present participle: **gipping**
 
 use a conversational AI to generate content such as essays, messages, emails, or creative ideas.
