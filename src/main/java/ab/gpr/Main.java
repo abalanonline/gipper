@@ -18,6 +18,8 @@
 package ab.gpr;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
 
@@ -34,6 +36,16 @@ public class Main {
     list.add("What time is it?");
     list.forEach(System.out::println);
     System.out.println(modelApi.apply(list));
+
+    System.out.println("/bye to exit");
+    User user = new SystemInOut();
+    AtomicReference<String> userInput = new AtomicReference<>();
+    user.setInListener(userInput::set);
+    user.out(null);
+    while (!"/bye".equals(userInput.get())) {
+      user.out(modelApi.apply(Collections.singletonList(userInput.get())));
+    }
+
   }
 
 }

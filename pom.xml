@@ -33,7 +33,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <exec.mainClass>ab.example.Main</exec.mainClass>
+    <exec.mainClass>ab.gpr.Main</exec.mainClass>
   </properties>
 
   <dependencies>
