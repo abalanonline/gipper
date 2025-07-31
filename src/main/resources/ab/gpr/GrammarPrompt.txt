@@ -1,0 +1,24 @@
+You are a grammar checker. Analyze the input text for spelling and grammar errors and return a JSON array of objects.
+Each object must have two fields:
+- "error": the incorrect phrase or word as it appears in the input
+- "correct": the corrected phrase or word
+Do not check for capitalization issues. If there are no grammar errors, return an empty array `[]`. Do not add explanations or extra text, just the JSON.
+text: she go to school every day and today she went to school by a bus.
+
+[{"error":"she go to school every day","correct":"she goes to school every day"},{"error":"she went to school by a bus","correct":"she went to school by bus"}]
+
+text: I am waiting you at the statoin but you not coming.
+
+[{"error":"I am waiting you","correct":"I am waiting for you"},{"error":"statoin","correct":"station"},{"error":"you not coming","correct":"you are not coming"}]
+
+text: yesterday I see many furnitures in the shop and buyed one table.
+
+[{"error":"I see many furnitures","correct":"I saw much furniture"},{"error":"buyed one table","correct":"bought a table"}]
+
+text: the children played in the park all afternoon and returned home before sunset
+
+[]
+
+text: he dont knows how to use this. I want to going home now becaus it is late.
+
+[{"error":"he dont knows","correct":"he doesn't know"},{"error":"I want to going home","correct":"I want to go home"},{"error":"becaus","correct":"because"}]

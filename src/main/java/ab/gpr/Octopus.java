@@ -31,6 +31,9 @@ public class Octopus implements ModelApi {
   protected final Gson gson = new Gson();
   protected String url = "https://api.openai.com/v1/responses";
   protected final Map<String, String> headers = new LinkedHashMap<>();
+  // free: gpt-4.1-mini $1.60, gpt-4.1-nano $0.40, gpt-4o-mini $0.60
+  // paid: gpt-4.1 $8.00, o3-mini $4.40
+  // government-issued ID: o4-mini $4.40
   public String model = "gpt-4.1-nano";
   public String systemPrompt;
 

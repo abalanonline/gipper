@@ -17,14 +17,11 @@
 
 package ab.gpr;
 
-public class Main {
+import java.util.function.Consumer;
 
-  public static void main(String[] args) {
-    Octopus grammarModelApi = new Octopus();
-    grammarModelApi.model = "gpt-4o-mini";
-    GrammarCheck grammarCheck = new GrammarAi(grammarModelApi);
-    ModelApi modelApi = new Octopus();
-    new Gipper().run(new SystemInOut(), new Doug(), grammarCheck);
-  }
-
+/**
+ * Checks grammar in a positive punishment way by crashing the system on mistake.
+ * TODO: add a reinforcement option too
+ */
+public interface GrammarCheck extends Consumer<String> {
 }
