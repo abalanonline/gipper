@@ -19,11 +19,13 @@ package ab.gpr;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Gipper {
 
   protected final List<String> history = new ArrayList<>();
+  public final BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
   public Gipper() {
     history.add("You are Marv, a chatbot that reluctantly answers questions with sarcastic responses.\n" +
@@ -35,17 +37,29 @@ public class Gipper {
     history.add("On December 17, 1903, Wilbur and Orville Wright made the first flights. I wish they’d come and take me away.");
   }
 
-  public void run(User user, ModelApi primary, GrammarCheck grammarCheck) {
-    AtomicReference<String> userInput = new AtomicReference<>();
-    user.setInListener(userInput::set);
+  public void run(User user, ModelApi primary, Filter filter, GrammarCheck grammarCheck) {
+    user.setInListener(queue::add);
     user.out("/bye to exit");
-    while (!"/bye".equals(userInput.get())) {
-      String inputString = userInput.get();
-      grammarCheck.accept(inputString);
-      history.add(inputString);
-      String outputString = primary.apply(history);
-      history.add(outputString);
-      user.out(outputString);
+    String s;
+    while (true) {
+      try {
+        s = queue.take();
+      } catch (InterruptedException e) {
+        break;
+      }
+      if (s.charAt(0) == '/') {
+        if ("/bye".equals(s)) break;
+        throw new IllegalStateException();
+      } else {
+        String inputFilter = filter.mask(s);
+        System.out.println("/filterInput " + inputFilter);
+        grammarCheck.accept(inputFilter);
+        history.add(inputFilter);
+        String outputFilter = primary.apply(history);
+        System.out.println("/filterOutput " + outputFilter);
+        history.add(outputFilter);
+        user.out(filter.unmask(outputFilter));
+      }
     }
   }
 
